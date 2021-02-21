@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="data/logo.svg" type="images/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess online</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <span class="header_title">Chess</span> 
+        <span class="header_subtitle">online</span> 
+    </div>
+
+    <div id="vue1">
+        <div class="board" :style="{ transform: (figColor == -1) ? 'rotate(180deg)' : 'rotate(0deg)' }">  
+            <div v-for="(board_i, i) in board" class="board__line">
+                <div v-for="(board_j, j) in board_i" :ref="i*8 + j" @click="cellAction(i, j)" :style="{ backgroundColor: board_j.bg }" class="board__line__cell">
+                    <img v-if="(board_j.fig != 0)" :src="`data/${board_j.fig}.png`" alt="FIGURE" class="cell_figure" :style="{ transform: (figColor == -1) ? 'rotate(-180deg)' : 'rotate(0deg)' }"> 
+                </div>
+            </div>
+            
+        </div>
+        <div class="button_box">
+            <div @click="figColor = 1, isSwitch = true" class="botton__switch_white">
+                <img v-if="figColor == 1" src="data/horse.svg" alt="horse" class="botton__switch_horse">
+            </div>
+            <div @click="reset()" class="button_reset">New game</div>
+            <div @click="figColor = -1, isSwitch = true" class="botton__switch_black">
+                <img v-if="figColor == -1" src="data/horse.svg" alt="horse" class="botton__switch_horse">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://gudw.000webhostapp.com/advdel.js"></script>
+</body>
+</html>
